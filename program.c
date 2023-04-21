@@ -3,27 +3,27 @@
 char courses[10][10] = {};
 char sections[2][3] = {};
 
-// Login function
+// Login module
 void login()
 {
 }
 
-// Display profile function
+// Display profile module
 void displayStudentProfile()
 {
 }
 
-// Course enrollment function
+// Course enrollment module
 void courseEnrollment()
 {
 }
 
-// Fees function
+// Fees module
 void fees()
 {
 }
 
-// Main function
+// Main module
 void main()
 {
 }
