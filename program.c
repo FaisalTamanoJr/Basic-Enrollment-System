@@ -9,12 +9,12 @@ void login()
 }
 
 // Display profile module
-void displayStudentProfile()
+void display_student_profile()
 {
 }
 
 // Course enrollment module
-void courseEnrollment()
+void course_enrollment()
 {
 }
 
