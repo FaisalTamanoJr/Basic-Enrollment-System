@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 // Constants
 #define NumberOfCourses 10
@@ -12,7 +13,7 @@ char user_details[NumberOfUsers][8][20] = {};
 char user_courses[NumberOfUsers][MaxCourses][10];
 
 // Course Arrays
-char courses[NumberOfCourses][10] = {};
+char courses[NumberOfCourses][10] = {"GEMATMW", "GERIZAL", "GESTSOC", "COEDISC", "CALENG1", "PROLOGI", "LBOEC2A", "LBYCPA1" };
 char course_details[NumberOfCourses][5][10] = {}; // [course index][type, section, time, day, room]
 int course_units[NumberOfCourses] = {};
 
