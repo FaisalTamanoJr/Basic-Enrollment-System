@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 // Constants
 #define NumberOfCourses 10
@@ -52,18 +53,32 @@ bool login(char *username, char *password)
 }
 
 // Display profile module
-void display_student_profile(char *username, char *lastname, char *firstname, char *middlename, char *degreeprogram, char *college, char *permanentaddress, int *permanenettelephone, char *presentaddress)
+void display_student_profile(char *username)
 {
-    printf("Academic and Personal Info:");
+    char lastname[20], firstname[20], middlename[20], degreeprogram[20], college[20], permAdd[20], permTel[20], presAdd[20];
+    for (int i = 0; i < NumberOfUsers; i++)
+    {
+        if (strcmp(username, usernames[i]) == 0)
+        {
+            strcpy(lastname, user_details[i][0]);
+            strcpy(firstname, user_details[i][1]);
+            strcpy(middlename, user_details[i][2]);
+            strcpy(degreeprogram, user_details[i][3]);
+            strcpy(college, user_details[i][4]);
+            strcpy(permAdd, user_details[i][5]);
+            strcpy(permTel, user_details[i][6]);
+            strcpy(presAdd, user_details[i][7]);
+        }
+    }
+    printf("Academic and Personal Info:\n");
     printf("Last Name: %s\n", lastname);
     printf("First Name: %s\n", firstname);
     printf("Middle Name: %s\n", middlename);
     printf("Degree Program: %s\n", degreeprogram);
     printf("College: %s\n", college);
-    printf("Permanent Address: %s\n", permanentaddress);
-    printf("Permanent Telephone No: %d\n", permanenttelephone);
-    printf("Present Address: %s\n", presentaddress);
-
+    printf("Permanent Address: %s\n", permAdd);
+    printf("Permanent Telephone No: %s\n", permTel);
+    printf("Present Address: %s\n", presAdd);
 }
 
 // Course enrollment module
