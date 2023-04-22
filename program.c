@@ -18,6 +18,7 @@ char user_details[NumberOfUsers][8][20] =
     {"Tamano", "Faisal Richard Jr.", "Dianalan", "BSCPE", "GCOE", "Manila", "224466881", "Manila"}
 }; // [user index][lastname, firstname, middlename, degree program, college, permanent address, permanent telephone no., present address]
 char user_courses[NumberOfUsers][MaxCourses][10];
+char user_courses_section[NumberOfUsers][MaxCourses][10];
 
 // Course Arrays
 char courses[NumberOfCourses][10] = {"GEMATMW", "GERIZAL", "GESTSOC", "COEDISC", "CALENG1", "PROLOGI", "LBYCPA1", "LBYCPA1", "LBOEC2A", "LBOEC2A"};
@@ -85,11 +86,112 @@ void display_student_profile(char *username)
 // Course enrollment module
 void course_enrollment(char *username)
 {
+    bool keepAsking = true;
+    int userIndex;
+
+    // Find the user index
+    for (int i = 0; i < NumberOfUsers; i++)
+    {
+        if (strcmp(username, usernames[i]) == 0)
+        {
+            userIndex = i;
+        }
+    }
+
+    // Display the list of courses and their corresponding section
     printf("************************************\n");
     printf("Available courses and their section:\n");
     for (int i = 0; i < NumberOfCourses; i++)
     {
         printf("%s - %s\n", courses[i], course_details[i][1]);
+    }
+
+    // Ask the user for courses to add
+    int user_coursesIndex = 0;
+    while (keepAsking == true)
+    {
+        int unitsSum = 0;
+        char addCourse[10];
+        char courseSection[11];
+        
+        // Compute for the sum of units
+        for (int i = 0; i < MaxCourses; i++)
+        {
+            for (int j = 0; j < NumberOfCourses; j++)
+            {
+                if (strcmp(user_courses[userIndex][i], courses[j]) == 0 && strcmp(user_courses_section[userIndex][i], course_details[j][1]) == 0)
+                {
+                    unitsSum += course_units[j];
+                }
+            }
+        }
+
+        if (unitsSum >= 12)
+        {
+            printf("Maximum allowed number of courses reached");
+            keepAsking = false;
+            break;
+        }
+
+        // Add course
+        printf("Select a course to add using the course code: ");
+        gets(addCourse);
+        printf("From which section? ");
+        gets(courseSection);
+        for (int i = 0; i < NumberOfCourses; i++)
+        {
+            if (strcmp(addCourse, courses[i]) == 0 && strcmp(courseSection, course_details[i][1]) == 0) // If it is a valid course with a valid section
+            {
+                if ((unitsSum + course_units[i]) <= 12) // If adding the course would not exceed the maximum
+                {
+                    // if the schedules do not conflict
+                    bool conflictingSchedule = false;
+
+                    for (int j = 0; j < MaxCourses; j++)
+                    {
+                        char userCourseTime[11];
+                        char userCourseDay[11];
+                        for (int k = 0; k < NumberOfCourses; k++)
+                        {
+                            if (strcmp(user_courses[userIndex][j], courses[k]) == 0 && strcmp(user_courses_section[userIndex][j], course_details[k][1]) == 0)
+                            {
+                                strcpy(userCourseTime, course_details[k][2]);
+                                strcpy(userCourseDay, course_details[k][3]);
+                            }
+                        }
+                        if (strcmp(course_details[i][2], userCourseTime) == 0 && strcmp(course_details[i][3], userCourseDay) == 0)
+                        {
+                            conflictingSchedule = true;
+                        }
+                    }
+
+                    if (conflictingSchedule == false)
+                    {
+                        strcpy(user_courses[userIndex][user_coursesIndex],  addCourse);
+                        strcpy(user_courses_section[userIndex][user_coursesIndex],  courseSection);
+                        user_coursesIndex += 1;
+                        printf("+1 Course Added\n");
+                    }
+                }
+            }
+        }
+
+        // Ask the user if they want to add more courses after passing the minimum
+        if (unitsSum >= 6)  
+        {
+            char addMore[1];
+            printf("Do you want to add more courses? [y/n]: ");
+            gets(addMore);
+            switch (strcmp(addMore, "n"))
+            {
+                case 0:
+                    keepAsking = false;
+                    break;
+                default:
+                    keepAsking = true;
+            }
+        }
+
     }
 }
 
