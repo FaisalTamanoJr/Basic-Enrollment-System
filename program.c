@@ -38,22 +38,21 @@ int course_units[NumberOfCourses] = {3, 3, 3, 1, 3, 2, 2, 2, 2, 2};
 // Login module
 bool login(char *username, char *password)
 {
-    for (int i = 0; i < NumberOfUsers; i++)
-    {
-        if (strcmp(username, usernames[i]) == 0)
-        {
-            if (strcmp(password, passwords[i]) == 0)
-            {
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 // Display profile module
-void display_student_profile(char *username)
+void display_student_profile(char *username, char *lastname, char *firstname, char *middlename, char *degreeprogram, char *college, char *permanentaddress, int *permanenettelephone, char *presentaddress)
 {
+    printf("Academic and Personal Info:");
+    printf("Last Name: %s\n", lastname);
+    printf("First Name: %s\n", firstname);
+    printf("Middle Name: %s\n", middlename);
+    printf("Degree Program: %s\n", degreeprogram);
+    printf("College: %s\n", college);
+    printf("Permanent Address: %s\n", permanentaddress);
+    printf("Permanent Telephone No: %d\n", permanenttelephone);
+    printf("Present Address: %s\n", presentaddress);   
+    
 }
 
 // Course enrollment module
@@ -127,7 +126,7 @@ void main()
     // Do not allow access to the program until the user inputs a valid username and password
     printf("Login\n");
 
-    while (allowAccess != true)
+    while (allowAccess = false)
     {
         printf("Input your username: ");
         gets(username);
