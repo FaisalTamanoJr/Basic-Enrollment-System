@@ -174,4 +174,3 @@ void main()
     // Calculate the student fees
     fees(username);
 }
-
