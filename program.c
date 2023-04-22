@@ -53,6 +53,58 @@ void course_enrollment(char *username)
 // Fees module
 void fees(char *username)
 {
+    float totalFees = 0;
+    int i, j, numUnits;
+    bool found;
+
+    printf("\n\nCourse Fees:\n");
+    for (i = 0; i < NumberOfUsers; i++)
+    {
+        if (strcmp(usernames[i], username) == 0)
+        {
+            for (j = 0; j < MaxCourses; j++)
+            {
+                if (strlen(user_courses[i][j]) == 0)
+                {
+                    break;
+                }
+                found = false;
+                numUnits = 0;
+                for (int k = 0; k < NumberOfCourses; k++)
+                {
+                    if (strcmp(user_courses[i][j], courses[k]) == 0)
+                    {
+                        found = true;
+                        if (strcmp(course_details[k][0], "LAB") == 0)
+                        {
+                            numUnits += 2;
+                            totalFees += 2500.00;
+                        }
+                        else
+                        {
+                            numUnits += 3;
+                            totalFees += 1500.50;
+                        }
+                        printf("%s - %.2f\n", user_courses[i][j], numUnits * ((strcmp(course_details[k][0], "LAB") == 0) ? 2500.00 : 1500.50));
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    printf("Invalid course: %s\n", user_courses[i][j]);
+                }
+            }
+            break;
+        }
+    }
+
+    // Add miscellaneous and ID validation fees
+    printf("\nMiscellaneous - 813.00");
+    totalFees += 813.00;
+    printf("\nID Validation - 46.00");
+    totalFees += 46.00;
+
+    printf("\n\nTotal Fees: %.2f", totalFees);
 }
 
 // Main module
