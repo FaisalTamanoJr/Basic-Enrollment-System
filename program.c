@@ -9,7 +9,8 @@
 // User Arrays
 char usernames[NumberOfUsers][20] = {"Dela Cruz", "Garcia", "Quitoriano", "Tamano"};
 char passwords[NumberOfUsers][20] = {"Katrina Reigne", "Carlo Jezer", "Carissa Lois", "Faisal Richard"};
-char user_details[NumberOfUsers][8][20] = {
+char user_details[NumberOfUsers][8][20] = 
+{
     {"Dela Cruz", "Katrina Reigne", "Marfori", "BSCPE", "GCOE", "Manila", "123456789", "Manila"},
     {"Garcia", "Carlo Jezer", "Lacap", "BSCPE", "GCOE", "Manila", "987654321", "Manila"},
     {"Quitoriano", "Carissa Lois", "Legamia", "BSCPE", "GCOE", "Manila", "112233445", "Manila"},
@@ -45,17 +46,43 @@ void display_student_profile(char *username)
 }
 
 // Course enrollment module
-void course_enrollment()
+void course_enrollment(char *username)
 {
 }
 
 // Fees module
-void fees()
+void fees(char *username)
 {
 }
 
 // Main module
 void main()
 {
-}
+    char username[20], password[20];
+    bool allowAccess = false;
 
+    // Do not allow access to the program until the user inputs a valid username and password
+    printf("Login\n");
+
+    while (allowAccess = false)
+    {
+        printf("Input your username: ");
+        gets(username);
+        printf("Input your password: ");
+        gets(password);
+        allowAccess = login(username, password);
+        if (allowAccess == false)
+        {
+            printf("error: incorrect login details\n");
+        }
+    }
+
+    // Display student profile
+    display_student_profile(username);
+
+    // Enroll the student
+    course_enrollment(username);
+
+    // Calculate the student fees
+    fees(username);
+}
