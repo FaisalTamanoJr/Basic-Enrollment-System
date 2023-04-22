@@ -71,8 +71,8 @@ void display_student_profile(char *username)
             strcpy(presAdd, user_details[i][7]);
         }
     }
-    printf("***************************\n");
-    printf("Academic and Personal Info:\n");
+    printf("\n***************************\n");
+    printf("Academic and Personal Info:\n\n");
     printf("Last Name: %s\n", lastname);
     printf("First Name: %s\n", firstname);
     printf("Middle Name: %s\n", middlename);
@@ -99,8 +99,8 @@ void course_enrollment(char *username)
     }
 
     // Display the list of courses and their corresponding section
-    printf("************************************\n");
-    printf("Available courses and their section:\n");
+    printf("\n************************************\n");
+    printf("Available courses and their section:\n\n");
     for (int i = 0; i < NumberOfCourses; i++)
     {
         printf("%s - %s\n", courses[i], course_details[i][1]);
@@ -128,13 +128,13 @@ void course_enrollment(char *username)
 
         if (unitsSum >= 12)
         {
-            printf("Maximum allowed number of courses reached");
+            printf("\nMaximum allowed number of courses reached\n");
             keepAsking = false;
             break;
         }
 
         // Add course
-        printf("Select a course to add using the course code: ");
+        printf("\nSelect a course to add using the course code: ");
         gets(addCourse);
         printf("From which section? ");
         gets(courseSection);
@@ -202,7 +202,8 @@ void fees(char *username)
     int i, j, numUnits;
     bool found;
 
-    printf("\n\nCourse Fees:\n");
+    printf("\n************\n");
+    printf("Course Fees:\n");
     for (i = 0; i < NumberOfUsers; i++)
     {
         if (strcmp(usernames[i], username) == 0)
@@ -214,7 +215,6 @@ void fees(char *username)
                     break;
                 }
                 found = false;
-                numUnits = 0;
                 for (int k = 0; k < NumberOfCourses; k++)
                 {
                     if (strcmp(user_courses[i][j], courses[k]) == 0)
@@ -222,13 +222,13 @@ void fees(char *username)
                         found = true;
                         if (strcmp(course_details[k][0], "LAB") == 0)
                         {
-                            numUnits += 2;
-                            totalFees += 2500.00;
+                            numUnits = course_units[k];
+                            totalFees += numUnits * 2500.00;
                         }
                         else
                         {
-                            numUnits += 3;
-                            totalFees += 1500.50;
+                            numUnits = course_units[k];
+                            totalFees += numUnits * 1500.50;
                         }
                         printf("%s - %.2f\n", user_courses[i][j], numUnits * ((strcmp(course_details[k][0], "LAB") == 0) ? 2500.00 : 1500.50));
                         break;
@@ -249,7 +249,7 @@ void fees(char *username)
     printf("\nID Validation - 46.00");
     totalFees += 46.00;
 
-    printf("\n\nTotal Fees: %.2f", totalFees);
+    printf("\n\nTotal Fees: %.2f\n", totalFees);
 }
 
 // Main module
@@ -263,14 +263,14 @@ void main()
 
     while (allowAccess != true)
     {
-        printf("Input your username: ");
+        printf("\nInput your username: ");
         gets(username);
         printf("Input your password: ");
         gets(password);
         allowAccess = login(username, password);
         if (allowAccess == false)
         {
-            printf("error: incorrect login details\n");
+            printf("\nerror: incorrect login details\n");
         }
     }
 
