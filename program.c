@@ -38,6 +38,17 @@ int course_units[NumberOfCourses] = {3, 3, 3, 1, 3, 2, 2, 2, 2, 2};
 // Login module
 bool login(char *username, char *password)
 {
+    for (int i = 0; i < NumberOfUsers; i++)
+    {
+        if (strcmp(username, usernames[i]) == 0)
+        {
+            if (strcmp(password, passwords[i]) == 0)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Display profile module
@@ -116,7 +127,7 @@ void main()
     // Do not allow access to the program until the user inputs a valid username and password
     printf("Login\n");
 
-    while (allowAccess = false)
+    while (allowAccess != true)
     {
         printf("Input your username: ");
         gets(username);
