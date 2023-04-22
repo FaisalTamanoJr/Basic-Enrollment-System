@@ -70,6 +70,7 @@ void display_student_profile(char *username)
             strcpy(presAdd, user_details[i][7]);
         }
     }
+    printf("***************************\n");
     printf("Academic and Personal Info:\n");
     printf("Last Name: %s\n", lastname);
     printf("First Name: %s\n", firstname);
@@ -84,6 +85,12 @@ void display_student_profile(char *username)
 // Course enrollment module
 void course_enrollment(char *username)
 {
+    printf("************************************\n");
+    printf("Available courses and their section:\n");
+    for (int i = 0; i < NumberOfCourses; i++)
+    {
+        printf("%s - %s\n", courses[i], course_details[i][1]);
+    }
 }
 
 // Fees module
