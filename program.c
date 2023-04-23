@@ -113,7 +113,7 @@ void course_enrollment(char *username)
         int unitsSum = 0;
         char addCourse[10];
         char courseSection[11];
-        
+
         // Compute for the sum of units
         for (int i = 0; i < MaxCourses; i++)
         {
@@ -128,7 +128,7 @@ void course_enrollment(char *username)
 
         if (unitsSum >= 12)
         {
-            printf("\nMaximum allowed number of courses reached\n");
+            printf("\nMaximum number of courses reached\n");
             keepAsking = false;
             break;
         }
@@ -177,7 +177,7 @@ void course_enrollment(char *username)
         }
 
         // Ask the user if they want to add more courses after passing the minimum
-        if (unitsSum >= 6)  
+        if (unitsSum >= 6)
         {
             char addMore[1];
             printf("Do you want to add more courses? [y/n]: ");
@@ -283,3 +283,4 @@ void main()
     // Calculate the student fees
     fees(username);
 }
+
